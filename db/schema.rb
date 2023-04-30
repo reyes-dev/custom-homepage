@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_122251) do
 
   create_table "web_links", force: :cascade do |t|
     t.string "name"
-    t.text "url"
+    t.text "web_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

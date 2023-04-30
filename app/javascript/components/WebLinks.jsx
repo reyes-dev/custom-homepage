@@ -12,14 +12,13 @@ const WebLinks = () => {
       throw new Error('Network response was not ok.')
     }).then((response) => {
       console.log(response)
-
       setWebLinks(response);
     })
   }, [])
 
   const allWebLinks = webLinks.map((link, index) => {
       return <div key={index}>
-        <a href={link.url}>{link.name}</a>
+        <a href={'https://' + link.web_url} target='_blank'>{link.name}</a>
       </div>
     });
 
