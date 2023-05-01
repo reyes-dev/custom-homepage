@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UpdateWebLink from "./UpdateWebLink";
+import DeleteWebLink from "./DeleteWebLink";
 
 const WebLinks = () => {
   const [webLinks, setWebLinks] = useState([]);
@@ -19,6 +20,7 @@ const WebLinks = () => {
       return <div key={index}>
         <a href={'https://' + link.web_url} target='_blank'>{link.name}</a>
         <UpdateWebLink id={link.id} />
+        <DeleteWebLink id={link.id} />
       </div>
     });
 
