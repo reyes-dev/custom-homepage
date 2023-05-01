@@ -18,7 +18,7 @@ const WebLinks = () => {
 
   const allWebLinks = webLinks.map((link, index) => {
       return <div key={index}>
-        <a href={'https://' + link.web_url} target='_blank'>{link.name}</a>
+        <a href={'https://' + link.web_url} target='_blank' className="font-['Jura'] ">{link.name}</a>
         <UpdateWebLink id={link.id} />
         <DeleteWebLink id={link.id} />
       </div>
