@@ -22,7 +22,7 @@ const DeleteWebLink = ({id}) => {
 
   return (
     <div>
-      <button onClick={onClick}>Delete Link</button>
+      <button onClick={onClick} className="font-jura">[ - ]</button>
     </div>
   )
 }

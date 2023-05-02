@@ -14,7 +14,7 @@ const WebLinks = () => {
     }).then((response) => {
       setWebLinks(response);
     })
-  }, [])
+  }, []);
 
   const allWebLinks = webLinks.map((link, index) => {
       return <div key={index}>
