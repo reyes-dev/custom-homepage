@@ -15,9 +15,8 @@ const NewWebLink = () => {
     setFunction(event.target.value);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    const route = '/web_links';
 
     if (name.length == 0 || webUrl.length == 0) {
       return;
@@ -28,7 +27,7 @@ const NewWebLink = () => {
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
-    fetch(route, {
+    await fetch('/web_links', {
       method: 'POST',
       headers: {
         'X-CSRF-Token': token,
