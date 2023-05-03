@@ -1,6 +1,7 @@
 class WebLink < ApplicationRecord
   after_create_commit { broadcast_create_link }
   after_update_commit { broadcast_update_link }
+  after_destroy_commit { broadcast_destroy_link }
 
   private
 
@@ -14,6 +15,14 @@ class WebLink < ApplicationRecord
 
   def broadcast_update_link
     ActionCable.server.broadcast('WebLinksChannel', { action: 'update', broadcasted_web_link: {
+      id:,
+      name:,
+      web_url:,
+    }})
+  end
+
+  def broadcast_destroy_link
+    ActionCable.server.broadcast('WebLinksChannel', { action: 'destroy', broadcasted_web_link: {
       id:,
       name:,
       web_url:,

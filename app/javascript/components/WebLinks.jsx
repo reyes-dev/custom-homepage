@@ -51,6 +51,11 @@ const WebLinks = () => {
         link_obj = link.broadcasted_web_link
         setWebLinks(webLinks => webLinks.map((obj) => (obj.id === link_obj.id ? link_obj : obj)));
         break;
+      case 'destroy':
+        console.log('Destroy case.')
+        link_obj = link.broadcasted_web_link
+        setWebLinks(webLinks => webLinks.filter((obj) => (obj.id != link_obj.id)));
+        break;
     }
   };
 
