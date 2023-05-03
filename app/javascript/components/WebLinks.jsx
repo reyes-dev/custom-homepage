@@ -40,7 +40,18 @@ const WebLinks = () => {
     if (data.type === 'confirm_subscription') return;
 
     const link = data.message;
-    setWebLinks([...webLinks, link]);
+    switch (link.action) {
+      case 'create':
+        console.log('Create case.')
+        link_obj = link.broadcasted_web_link
+        setWebLinks([...webLinks, link_obj]);
+        break;
+      case 'update':
+        console.log('Update case.')
+        link_obj = link.broadcasted_web_link
+        setWebLinks(webLinks => webLinks.map((obj) => (obj.id === link_obj.id ? link_obj : obj)));
+        break;
+    }
   };
 
   const allWebLinks = webLinks.map((link, index) => {
