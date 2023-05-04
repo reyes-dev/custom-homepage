@@ -18,6 +18,9 @@ class AreasController < ApplicationController
     end
   
     def destroy
+      area = Area.find(params[:id])
+      area&.destroy
+      render json: { message: 'Area deleted!' }
     end
   
     private
