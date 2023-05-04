@@ -7,6 +7,12 @@ const ws = new WebSocket('ws://localhost:3000/cable');
 function App() {
   const [areas, setAreas] = useState([]);
   const [guid, setGuid] = useState('');
+  const [hidden, setHidden] = useState('hidden');
+
+  const toggleHidden = () => {
+    if (hidden === 'hidden') return setHidden('');
+    setHidden('hidden')
+  }
   /* A method called when a websocket server is connected to, and sets the Guid for an individual area, then subscribes to the WebLinksChannel with Guid */
   ws.onopen = () => {
       console.log('Connected to websocket server.');
@@ -61,14 +67,19 @@ function App() {
   };
 
   return (
-    <div className='bg-sky-100 flex flex-column h-screen w-screen justify-center items-center'>
-    <h1 className="font-daruma text-3xl">ホームページ</h1>
-      <NewArea />
+    <div className='bg-zinc-300 flex flex-column h-screen w-screen justify-center items-center'>
+      <div className="grid grid-cols-2 auto-rows-min gap-12 h-4/6 w-4/6 rounded-xl bg-zinc-400/50 p-8 overflow-auto drop-shadow-2xl columns-2">
+      <div className="flex gap-8 col-span-2 items-center ">
+        <h1 className="font-daruma text-8xl">ホームページ</h1>
+        <button onClick={toggleHidden}>[ Edit Mode ]</button>
+        <NewArea hidden={hidden} />
+      </div>
       {areas.map((area, index) => {
         return <div key={index}>
-          <Area title={area.name} id={area.id} />
+          <Area title={area.name} id={area.id} hidden={hidden} />
         </div>
       })}
+      </div>
     </div>
   );
 }; 

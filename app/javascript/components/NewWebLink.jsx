@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewWebLink = ({area_id}) => {
+const NewWebLink = ({area_id, hidden}) => {
   const [name, setName] = useState("");
   const [displayForm, setDisplayForm] = useState(false);
   const [webUrl, setWebUrl] = useState("");
@@ -53,7 +53,7 @@ const NewWebLink = ({area_id}) => {
   };
 
   return (
-    <div>
+    <div className={hidden}>
       <button onClick={ toggleDisplay }>[ + Link ]</button>
       {displayForm ? (<form onSubmit={onSubmit}>
           <label htmlFor="name">Name:</label>

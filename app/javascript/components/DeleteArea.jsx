@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteArea = ({area_id}) => {  
+const DeleteArea = ({area_id, hidden}) => {  
   const onClick = (event) => {
     event.preventDefault();
 
@@ -20,8 +20,8 @@ const DeleteArea = ({area_id}) => {
   };
 
   return (
-    <div>
-      <button onClick={onClick} className="font-jura">[ Remove Area ]</button>
+    <div className={hidden}>
+      <button onClick={onClick} className="font-jura">( - )</button>
     </div>
   )
 }

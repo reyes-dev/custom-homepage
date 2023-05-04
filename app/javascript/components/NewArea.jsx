@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewArea = () => {
+const NewArea = ({hidden}) => {
   const [name, setName] = useState("");
   const [displayForm, setDisplayForm] = useState(false);
 
@@ -52,15 +52,14 @@ const NewArea = () => {
   };
 
   return (
-    <div>
+    <div className={hidden}>
       <button onClick={ toggleDisplay }>[ + Area ]</button>
       { displayForm ?
         ( 
         <div>
-          <p>Area Name: </p>
           <form onSubmit={onSubmit}>
             <input type='text' name='name' id='areaName' required onChange={(event) => onChange(event, setName)}></input>
-              <button type='submit'>Add Section</button>
+              <button type='submit'>[ => ]</button>
           </form>
           </div>
         ) : null}

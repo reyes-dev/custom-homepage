@@ -4,7 +4,7 @@ import DeleteArea from "./DeleteArea";
 import WebLinks from './WebLinks'
 import NewWebLink from "./NewWebLink";
 
-const Area = ({ title, id }) => {
+const Area = ({ title, id, hidden }) => {
   const [displayUpdate, setDisplayUpdate] = useState(false);
 
   const toggleDisplayUpdate = () => {
@@ -15,15 +15,16 @@ const Area = ({ title, id }) => {
   }
 
   return (
-    <div className="border-black h-32 w-32">
+    <div className="bg-zinc-300 w-fit p-8">
+      <div className="flex flex-row gap-2">
       {displayUpdate ? <UpdateArea area_id={id} toggleDisplayUpdate={toggleDisplayUpdate} title={title} /> :
       <h2>
         <button onClick={ toggleDisplayUpdate }>{title}</button>
-        </h2>}
-      
-      <DeleteArea area_id={id} />
-      <WebLinks area_id={id} />
-      <NewWebLink area_id={id} />
+      </h2>}
+      <DeleteArea area_id={id} hidden={hidden} />
+      </div>
+      <WebLinks area_id={id} hidden={hidden} />
+      <NewWebLink area_id={id} hidden={hidden} />
     </div>
   )
 }

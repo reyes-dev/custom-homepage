@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WebLink from "./WebLink";
-import UpdateWebLink from "./UpdateWebLink";
-import DeleteWebLink from "./DeleteWebLink";
 
-const WebLinks = ({ area_id }) => {
+const WebLinks = ({ area_id, hidden }) => {
   const [webLinks, setWebLinks] = useState([]);
   const [guid, setGuid] = useState('');
   const [ws, setWs] = useState('');
@@ -63,7 +61,7 @@ const WebLinks = ({ area_id }) => {
   };
 
   const allWebLinks = webLinks.map((link, index) => {
-    return <WebLink link={link} key={index} area_id={area_id} />
+    return <WebLink link={link} key={index} area_id={area_id} hidden={hidden} />
   });
 
   return (

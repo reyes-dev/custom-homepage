@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteWebLink = ({id, area_id}) => {  
+const DeleteWebLink = ({id, area_id, hidden}) => {  
   const onClick = (event) => {
     event.preventDefault();
     const route = `/areas/${area_id}/web_links/${id}`;
@@ -21,7 +21,7 @@ const DeleteWebLink = ({id, area_id}) => {
   };
 
   return (
-    <div>
+    <div className={hidden}>
       <button onClick={onClick} className="font-jura">[ - ]</button>
     </div>
   )
