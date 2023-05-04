@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NewArea from "./NewArea";
 import Area from "./Area";
-import NewWebLink from "./NewWebLink";
 
 function App() {
   const [areas, setAreas] = useState([]);

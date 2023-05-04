@@ -11,6 +11,7 @@ class WebLink < ApplicationRecord
       id:,
       name:,
       web_url:,
+      area_id:,
     }})
   end
 
@@ -19,6 +20,7 @@ class WebLink < ApplicationRecord
       id:,
       name:,
       web_url:,
+      area_id:,
     }})
   end
 
@@ -27,6 +29,7 @@ class WebLink < ApplicationRecord
       id:,
       name:,
       web_url:,
+      area_id:,
     }})
   end
 end

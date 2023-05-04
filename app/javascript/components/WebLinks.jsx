@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import UpdateWebLink from "./UpdateWebLink";
 import DeleteWebLink from "./DeleteWebLink";
-/* Initialize websocket */
-const ws = new WebSocket('ws://localhost:3000/cable');
 
-const WebLinks = ({area_id}) => {
+const WebLinks = ({ area_id }) => {
   const [webLinks, setWebLinks] = useState([]);
   const [guid, setGuid] = useState('');
+  const [ws, setWs] = useState('');
+  /* Initialize a WebSocket, this will happen for each individual Area */
+  useEffect(() => { setWs(new WebSocket('ws://localhost:3000/cable')); }, [])
   /* Fetch all the links currently in the database */
   useEffect(() => {
     fetchLinks();
   }, []);
-
+  /* Grabs links from Rails route for web links and filters them appropriate to the area they belong to */
   const fetchLinks = async () => {
-    const response = await fetch('/web_links');
+    const response = await fetch(`/areas/${area_id}/web_links`);
     const data = await response.json();
-    console.log()
     setWebLinks(data.filter((obj) => obj.area_id === area_id));
   };
-  /* Open a websocket server to update the page if link records are altered */
+  /* A method called when a websocket server is connected to, and sets the Guid for an individual area, then subscribes to the WebLinksChannel with Guid */
   ws.onopen = () => {
     console.log('Connected to websocket server.');
     setGuid(Math.random().toString(36).substring(2, 15));
@@ -33,12 +33,13 @@ const WebLinks = ({area_id}) => {
       })
     );
   };
-  /* Update the page */
+  /* Update the Area state with the altered web link data */
   ws.onmessage = (e) => {
     const data = JSON.parse(e.data);
     if (data.type === 'ping') return;
     if (data.type === 'welcome') return;
     if (data.type === 'confirm_subscription') return;
+    if (data.message.broadcasted_web_link.area_id != area_id) return;
 
     const link = data.message;
     switch (link.action) {
@@ -63,8 +64,8 @@ const WebLinks = ({area_id}) => {
   const allWebLinks = webLinks.map((link, index) => {
     return <div key={index}>
       <a href={'https://' + link.web_url} target='_blank' className="font-['Jura'] ">{link.name}</a>
-      <UpdateWebLink id={link.id} />
-      <DeleteWebLink id={link.id} />
+      <UpdateWebLink id={link.id} area_id={ area_id} />
+      <DeleteWebLink id={link.id} area_id={ area_id} />
     </div>
   });
 

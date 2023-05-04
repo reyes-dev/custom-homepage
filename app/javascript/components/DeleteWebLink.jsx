@@ -1,9 +1,9 @@
 import React from "react";
 
-const DeleteWebLink = ({id}) => {  
+const DeleteWebLink = ({id, area_id}) => {  
   const onClick = (event) => {
     event.preventDefault();
-    const route = `/web_links/${id}`;
+    const route = `/areas/${area_id}/web_links/${id}`;
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(route, {

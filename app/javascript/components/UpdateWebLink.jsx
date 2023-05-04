@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const UpdateWebLink = ({id}) => {
+const UpdateWebLink = ({ id, area_id }) => {
   const [name, setName] = useState("");
   const [webUrl, setWebUrl] = useState("");
   
@@ -10,7 +10,7 @@ const UpdateWebLink = ({id}) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const route = `/web_links/${id}`;
+    const route = `/areas/${area_id}/web_links/${id}`;
 
     if (name.length == 0 || webUrl.length == 0) {
       return;

@@ -28,7 +28,7 @@ const NewWebLink = ({area_id}) => {
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
-    await fetch('/web_links', {
+    await fetch(`/areas/${area_id}/web_links`, {
       method: 'POST',
       headers: {
         'X-CSRF-Token': token,
