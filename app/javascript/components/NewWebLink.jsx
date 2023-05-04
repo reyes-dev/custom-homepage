@@ -2,7 +2,15 @@ import React, { useState } from "react";
 
 const NewWebLink = ({area_id}) => {
   const [name, setName] = useState("");
+  const [displayForm, setDisplayForm] = useState(false);
   const [webUrl, setWebUrl] = useState("");
+
+  const toggleDisplay = () => {
+    if (displayForm) {
+      return setDisplayForm(false);
+    }
+    setDisplayForm(true);
+  }
   /* In the stripHtmlEntities function, you replace the < and > characters with their escaped values. This way, you won’t store raw HTML in your database. */
   const stripHtmlEntities = (str) => {
     return String(str)
@@ -46,12 +54,14 @@ const NewWebLink = ({area_id}) => {
 
   return (
     <div>
-      <p>Add Link Information: </p>
-      <form onSubmit={onSubmit}>
-        <input type='text' name='name' id='webLinkName' required onChange={(event) => onChange(event, setName)}></input>
-        <input type='text' name='web_url' id='web_url' required onChange={(event) => onChange(event, setWebUrl)}></input>
-        <button type='submit'>Add Link</button>
-      </form>
+      <button onClick={ toggleDisplay }>[ + Link ]</button>
+      {displayForm ? (<form onSubmit={onSubmit}>
+          <label htmlFor="name">Name:</label>
+          <input type='text' name='name' id='webLinkName' required onChange={(event) => onChange(event, setName)}></input>
+          <label htmlFor="url">URL:</label>
+          <input type='text' name='web_url' id='web_url' required onChange={(event) => onChange(event, setWebUrl)}></input>
+          <button type='submit'>Add Link</button>
+        </form>) : null  }
     </div>
   )
 };

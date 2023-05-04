@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import WebLink from "./WebLink";
 import UpdateWebLink from "./UpdateWebLink";
 import DeleteWebLink from "./DeleteWebLink";
 
@@ -62,16 +63,11 @@ const WebLinks = ({ area_id }) => {
   };
 
   const allWebLinks = webLinks.map((link, index) => {
-    return <div key={index}>
-      <a href={'https://' + link.web_url} target='_blank' className="font-['Jura'] ">{link.name}</a>
-      <UpdateWebLink id={link.id} area_id={ area_id} />
-      <DeleteWebLink id={link.id} area_id={ area_id} />
-    </div>
+    return <WebLink link={link} key={index} area_id={area_id} />
   });
 
   return (
     <div>
-      <p>Guid: {guid}</p>
       {allWebLinks}
     </div>
   );

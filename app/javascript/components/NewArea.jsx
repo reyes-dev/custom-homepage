@@ -2,14 +2,21 @@ import React, { useState } from "react";
 
 const NewArea = () => {
   const [name, setName] = useState("");
+  const [displayForm, setDisplayForm] = useState(false);
 
-    /* In the stripHtmlEntities function, you replace the < and > characters with their escaped values. This way, you won’t store raw HTML in your database. */
-    const stripHtmlEntities = (str) => {
-      return String(str)
-        .replace(/\n/g, "<br> <br>")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-    };
+  const toggleDisplay = () => {
+    if (displayForm) {
+      return setDisplayForm(false);
+    }
+    setDisplayForm(true);
+  }
+  /* In the stripHtmlEntities function, you replace the < and > characters with their escaped values. This way, you won’t store raw HTML in your database. */
+  const stripHtmlEntities = (str) => {
+    return String(str)
+      .replace(/\n/g, "<br> <br>")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  };
   
 
   const onChange = (event, setFunction) => {
@@ -37,6 +44,7 @@ const NewArea = () => {
     }).then((response) => {
       if (response.ok) {
         console.log(response);
+        toggleDisplay();
         return response.json();
       }
       throw new Error('Network response was not ok.');
@@ -45,11 +53,17 @@ const NewArea = () => {
 
   return (
     <div>
-      <p>Area Name: </p>
-      <form onSubmit={onSubmit}>
-        <input type='text' name='name' id='areaName' required onChange={(event) => onChange(event, setName)}></input>
-        <button type='submit'>Add Section</button>
-      </form>
+      <button onClick={ toggleDisplay }>[ + Area ]</button>
+      { displayForm ?
+        ( 
+        <div>
+          <p>Area Name: </p>
+          <form onSubmit={onSubmit}>
+            <input type='text' name='name' id='areaName' required onChange={(event) => onChange(event, setName)}></input>
+              <button type='submit'>Add Section</button>
+          </form>
+          </div>
+        ) : null}
     </div>
   )
 };

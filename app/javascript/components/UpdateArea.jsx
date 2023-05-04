@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const UpdateArea = ({ area_id }) => {
-  const [name, setName] = useState("");
+const UpdateArea = ({ area_id, toggleDisplayUpdate, title }) => {
+  const [name, setName] = useState(title);
   
   const onChange = (event, setFunction) => {
     setFunction(event.target.value);
@@ -27,6 +27,7 @@ const UpdateArea = ({ area_id }) => {
       body: JSON.stringify(body),
     }).then((response) => {
       if (response.ok) {
+        toggleDisplayUpdate();
         return response.json();
       }
       throw new Error('Network response was not ok.');
@@ -36,7 +37,7 @@ const UpdateArea = ({ area_id }) => {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input type='text' name='name' id='webLinkName' required onChange={(event) => onChange(event, setName)}></input>
+        <input type='text' name='name' id='areaName' required onChange={(event) => onChange(event, setName)} value={name}></input>
         <button type='submit'>Update Title</button>
       </form>
     </div>

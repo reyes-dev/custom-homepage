@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const UpdateWebLink = ({ id, area_id }) => {
-  const [name, setName] = useState("");
-  const [webUrl, setWebUrl] = useState("");
+const UpdateWebLink = ({ id, area_id, toggleDisplay, linkName, url }) => {
+  const [name, setName] = useState(linkName);
+  const [webUrl, setWebUrl] = useState(url);
   
   const onChange = (event, setFunction) => {
     setFunction(event.target.value);
@@ -17,7 +17,8 @@ const UpdateWebLink = ({ id, area_id }) => {
     }
     const body = {
       name,
-      web_url: webUrl
+      web_url: webUrl,
+      area_id,
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -30,6 +31,7 @@ const UpdateWebLink = ({ id, area_id }) => {
       body: JSON.stringify(body),
     }).then((response) => {
       if (response.ok) {
+        toggleDisplay();
         return response.json();
       }
       throw new Error('Network response was not ok.');
@@ -39,8 +41,10 @@ const UpdateWebLink = ({ id, area_id }) => {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input type='text' name='name' id='webLinkName' required onChange={(event) => onChange(event, setName)}></input>
-        <input type='text' name='web_url' id='web_url' required onChange={(event) => onChange(event, setWebUrl)}></input>
+        <label htmlFor="name">Name:</label>
+        <input type='text' name='name' id='webLinkName' required onChange={(event) => onChange(event, setName)} value={name}></input>
+        <label htmlFor="url">URL:</label>
+        <input type='text' name='web_url' id='web_url' required onChange={(event) => onChange(event, setWebUrl)} value={webUrl}></input>
         <button type='submit'>Update Link</button>
       </form>
     </div>
