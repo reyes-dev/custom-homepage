@@ -4,7 +4,7 @@ import DeleteWebLink from "./DeleteWebLink";
 /* Initialize websocket */
 const ws = new WebSocket('ws://localhost:3000/cable');
 
-const WebLinks = () => {
+const WebLinks = ({area_id}) => {
   const [webLinks, setWebLinks] = useState([]);
   const [guid, setGuid] = useState('');
   /* Fetch all the links currently in the database */
@@ -15,7 +15,8 @@ const WebLinks = () => {
   const fetchLinks = async () => {
     const response = await fetch('/web_links');
     const data = await response.json();
-    setWebLinks(data);
+    console.log()
+    setWebLinks(data.filter((obj) => obj.area_id === area_id));
   };
   /* Open a websocket server to update the page if link records are altered */
   ws.onopen = () => {

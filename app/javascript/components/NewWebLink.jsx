@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewWebLink = () => {
+const NewWebLink = ({area_id}) => {
   const [name, setName] = useState("");
   const [webUrl, setWebUrl] = useState("");
   /* In the stripHtmlEntities function, you replace the < and > characters with their escaped values. This way, you won’t store raw HTML in your database. */
@@ -23,7 +23,8 @@ const NewWebLink = () => {
     }
     const body = {
       name,
-      web_url: webUrl
+      web_url: webUrl,
+      area_id
     };
 
     const token = document.querySelector('meta[name="csrf-token"]').content;

@@ -10,15 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_30_122251) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_015040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "web_links", force: :cascade do |t|
     t.string "name"
     t.text "web_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "area_id", null: false
+    t.index ["area_id"], name: "index_web_links_on_area_id"
   end
 
+  add_foreign_key "web_links", "areas"
 end

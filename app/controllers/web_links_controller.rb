@@ -28,6 +28,6 @@ class WebLinksController < ApplicationController
   private
 
   def web_link_params
-    params.require(:web_link).permit(:name, :web_url)
+    params.require(:web_link).permit(:name, :web_url, :area_id)
   end
 end

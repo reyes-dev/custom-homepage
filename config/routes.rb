@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   root 'pages#home'
   resources :web_links, only: [:index, :create, :update, :destroy]
+  resources :areas, only: [:index, :create, :update, :destroy]
 end
