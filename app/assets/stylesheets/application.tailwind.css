@@ -3,8 +3,21 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
-
 @font-face {
   font-family: 'Darumadrop One';
   src: url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+}
+@layer base {
+  a:hover, button:hover {
+    @apply text-funhover;
+  }
+  input[type="text"], textarea {
+    @apply bg-transparent;
+    @apply border-red-300;
+    @apply rounded-lg;
+  }
+  form {
+    @apply flex;
+    @apply gap-2;
+  }
 }

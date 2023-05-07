@@ -21,7 +21,7 @@ const DeleteArea = ({area_id, hidden}) => {
 
   return (
     <div className={hidden}>
-      <button onClick={onClick} className="font-jura">( - )</button>
+      <button onClick={onClick}>( - )</button>
     </div>
   )
 }

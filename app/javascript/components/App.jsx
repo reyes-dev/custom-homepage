@@ -60,25 +60,29 @@ function App() {
       fetchAreas();
     }, []);
   
-  const fetchAreas = async () => {
-    const response = await fetch('/areas');
-    const data = await response.json();
-    setAreas(data);
-  };
+    const fetchAreas = async () => {
+      const response = await fetch('/areas');
+      const data = await response.json();
+      setAreas(data);
+    };
+  
+  const allAreas = areas.map((area, index) => {
+      return <Area title={area.name} id={area.id} hidden={hidden} key={index} />
+    });
+    
 
   return (
-    <div className='bg-zinc-300 flex flex-column h-screen w-screen justify-center items-center'>
-      <div className="grid grid-cols-2 auto-rows-min gap-12 h-4/6 w-4/6 rounded-xl bg-zinc-400/50 p-8 overflow-auto drop-shadow-2xl columns-2">
-      <div className="flex gap-8 col-span-2 items-center ">
-        <h1 className="font-daruma text-8xl">ホームページ</h1>
-        <button onClick={toggleHidden}>[ Edit Mode ]</button>
-        <NewArea hidden={hidden} />
-      </div>
-      {areas.map((area, index) => {
-        return <div key={index}>
-          <Area title={area.name} id={area.id} hidden={hidden} />
+    <div className='font-["Jura"] bg-angel-devil bg-no-repeat bg-cover bg-fixed grid items-center justify-center h-screen text-angel'>
+      <div className="z-[1] h-[80vh] w-[80vw] relative bg-inherit rounded-[5px] p-8 overflow-hidden shadow-[0_0_16px_0_rgba(0,0,0,0.2)] before:pointer-events-none before:absolute before:bg-inherit before:top-0 before:left-0 before:right-0 before:bottom-0 before:shadow-[inset_0_0_2000px_rgba(103,0,6,.5)]  before:backdrop-blur-[7px] before:m-[-20px] before:z-[-1]">
+        <div className="flex flex-col gap-8 justify-center items-center">
+          <h1 className="text-8xl text-okaeri">welcome home</h1>
+          <button onClick={toggleHidden} className="">{` (・∀・) `}</button>
+          <NewArea hidden={hidden} />
         </div>
-      })}
+        
+        <div className="flex flex-wrap justify-start items-start">
+            {allAreas}
+        </div>
       </div>
     </div>
   );

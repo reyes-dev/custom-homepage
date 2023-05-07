@@ -38,7 +38,7 @@ const UpdateArea = ({ area_id, toggleDisplayUpdate, title }) => {
     <div>
       <form onSubmit={onSubmit}>
         <input type='text' name='name' id='areaName' required onChange={(event) => onChange(event, setName)} value={name}></input>
-        <button type='submit'>Update Title</button>
+        <button type='submit'>{`=>`}</button>
       </form>
     </div>
   )

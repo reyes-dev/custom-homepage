@@ -52,14 +52,14 @@ const NewArea = ({hidden}) => {
   };
 
   return (
-    <div className={hidden}>
+    <div className={hidden + ' flex gap-2 self-center'}>
       <button onClick={ toggleDisplay }>[ + Area ]</button>
       { displayForm ?
         ( 
         <div>
           <form onSubmit={onSubmit}>
             <input type='text' name='name' id='areaName' required onChange={(event) => onChange(event, setName)}></input>
-              <button type='submit'>[ => ]</button>
+              <button type='submit'>{`[ => ]`}</button>
           </form>
           </div>
         ) : null}

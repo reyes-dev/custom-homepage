@@ -21,8 +21,8 @@ const DeleteWebLink = ({id, area_id, hidden}) => {
   };
 
   return (
-    <div className={hidden}>
-      <button onClick={onClick} className="font-jura">[ - ]</button>
+    <div className={hidden + ` text-sm`}>
+      <button onClick={onClick}>[ - ]</button>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const UpdateWebLink = ({ id, area_id, toggleDisplay, linkName, url }) => {
+const UpdateWebLink = ({ id, area_id, toggleDisplay, linkName, url, hidden }) => {
   const [name, setName] = useState(linkName);
   const [webUrl, setWebUrl] = useState(url);
   
@@ -40,12 +40,12 @@ const UpdateWebLink = ({ id, area_id, toggleDisplay, linkName, url }) => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name">Name:</label>
+      <form onSubmit={onSubmit} className={hidden}>
+        <label htmlFor="name">Name: </label>
         <input type='text' name='name' id='webLinkName' required onChange={(event) => onChange(event, setName)} value={name}></input>
-        <label htmlFor="url">URL:</label>
+        <label htmlFor="url"> URL: </label>
         <input type='text' name='web_url' id='web_url' required onChange={(event) => onChange(event, setWebUrl)} value={webUrl}></input>
-        <button type='submit'>Update Link</button>
+        <button type='submit'> {`[=>]`}</button>
       </form>
     </div>
   )

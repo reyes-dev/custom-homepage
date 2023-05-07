@@ -15,11 +15,11 @@ const Area = ({ title, id, hidden }) => {
   }
 
   return (
-    <div className="bg-zinc-300 w-fit p-8">
-      <div className="flex flex-row gap-2">
+    <div className="w-1/5 p-8">
+      <div className="flex gap-2 items-center">
       {displayUpdate ? <UpdateArea area_id={id} toggleDisplayUpdate={toggleDisplayUpdate} title={title} /> :
       <h2>
-        <button onClick={ toggleDisplayUpdate }>{title}</button>
+        <button onClick={ toggleDisplayUpdate } className="text-area-title text-3xl">{title}</button>
       </h2>}
       <DeleteArea area_id={id} hidden={hidden} />
       </div>

@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const NewWebLink = ({area_id, hidden}) => {
   const [name, setName] = useState("");
   const [displayForm, setDisplayForm] = useState(false);
   const [webUrl, setWebUrl] = useState("");
+
+  useEffect(() => {
+    setDisplayForm(false);
+  }, [hidden])
+
+  const toggleNameUrl = () => {
+    setName('');
+    setWebUrl('');
+  }
 
   const toggleDisplay = () => {
     if (displayForm) {
@@ -45,7 +54,7 @@ const NewWebLink = ({area_id, hidden}) => {
       body: JSON.stringify(body),
     }).then((response) => {
       if (response.ok) {
-        console.log(response);
+        toggleNameUrl();
         return response.json();
       }
       throw new Error('Network response was not ok.');
@@ -54,13 +63,13 @@ const NewWebLink = ({area_id, hidden}) => {
 
   return (
     <div className={hidden}>
-      <button onClick={ toggleDisplay }>[ + Link ]</button>
+      <button onClick={toggleDisplay}>[ + Link ]</button>
       {displayForm ? (<form onSubmit={onSubmit}>
           <label htmlFor="name">Name:</label>
-          <input type='text' name='name' id='webLinkName' required onChange={(event) => onChange(event, setName)}></input>
+        <input type='text' name='name' id='webLinkName' required value={name} onChange={(event) => onChange(event, setName)}></input>
           <label htmlFor="url">URL:</label>
-          <input type='text' name='web_url' id='web_url' required onChange={(event) => onChange(event, setWebUrl)}></input>
-          <button type='submit'>Add Link</button>
+        <input type='text' name='web_url' id='web_url' required value={webUrl}  onChange={(event) => onChange(event, setWebUrl)}></input>
+        <button type='submit'>Add Link</button>
         </form>) : null  }
     </div>
   )

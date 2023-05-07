@@ -18,6 +18,15 @@ module.exports = {
         daruma: ["Darumadrop One", ...defaultTheme.fontFamily.sans],
         jura: ["Jura", ...defaultTheme.fontFamily.sans],
       },
+      backgroundImage: {
+        "angel-devil": "url('https://i.redd.it/wf3ehgf679ca1.png')",
+      },
+      colors: {
+        angel: "#fdfdff",
+        "area-title": "#fec34b",
+        okaeri: "#b56576",
+        funhover: "#ef476f",
+      },
     },
   },
   plugins: [
