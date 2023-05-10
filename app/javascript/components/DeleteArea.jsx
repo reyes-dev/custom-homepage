@@ -3,7 +3,7 @@ import React from "react";
 const DeleteArea = ({area_id, hidden}) => {  
   const onClick = (event) => {
     event.preventDefault();
-
+   /* Call to the rails area delete route with fetch, passing in the selected area's ID */
     const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(`/areas/${area_id}`, {
       method: 'DELETE',

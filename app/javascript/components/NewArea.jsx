@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 const NewArea = ({hidden}) => {
+  /* Name refers to the title of the new area */
   const [name, setName] = useState("");
+  /* For conditionally rendering the form which creates a new area */
   const [displayForm, setDisplayForm] = useState(false);
 
   const toggleDisplay = () => {
@@ -9,20 +11,13 @@ const NewArea = ({hidden}) => {
       return setDisplayForm(false);
     }
     setDisplayForm(true);
-  }
-  /* In the stripHtmlEntities function, you replace the < and > characters with their escaped values. This way, you won’t store raw HTML in your database. */
-  const stripHtmlEntities = (str) => {
-    return String(str)
-      .replace(/\n/g, "<br> <br>")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-  };
-  
+  }  
 
   const onChange = (event, setFunction) => {
     setFunction(event.target.value);
   };
-
+  /* When the form to create a new area is submitted, fetch calls POST to the 
+    create area route in rails, passing in the form data */
   const onSubmit = async (event) => {
     event.preventDefault();
 

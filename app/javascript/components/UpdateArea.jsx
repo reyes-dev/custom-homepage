@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 const UpdateArea = ({ area_id, toggleDisplayUpdate, title }) => {
+  /* New name of the area, by default it uses the already given title */
   const [name, setName] = useState(title);
   
   const onChange = (event, setFunction) => {
     setFunction(event.target.value);
   };
-
+  /* When the form to update the area name is submitted, 
+     fetch calls the PUT action to the area update route in rails */
   const onSubmit = (event) => {
     event.preventDefault();
 

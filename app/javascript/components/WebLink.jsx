@@ -3,8 +3,9 @@ import UpdateWebLink from "./UpdateWebLink";
 import DeleteWebLink from "./DeleteWebLink";
 
 const WebLink = ({ link, area_id, hidden }) => {
+  /* For conditionally rendering the update web link form */
   const [displayUpdate, setDisplayUpdate] = useState(false);
-
+ /* Whenever hidden is changed (edit mode is toggled), render or hide the update web link component */
   useEffect(() => {
     setDisplayUpdate(false);
   }, [hidden])

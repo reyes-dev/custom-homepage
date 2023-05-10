@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import WebLink from "./WebLink";
-
+/* Component that handles rendering all the web links of a given area */
 const WebLinks = ({ area_id, hidden }) => {
   const [webLinks, setWebLinks] = useState([]);
   const [guid, setGuid] = useState('');
@@ -41,6 +41,8 @@ const WebLinks = ({ area_id, hidden }) => {
     if (data.message.broadcasted_web_link.area_id != area_id) return;
 
     const link = data.message;
+      /* When a Rails action is called, an object is broadcasted which holds an action attribute, 
+      corresponding to the set of actions in the switch statement for creating, updating and deleting a web link in state */
     switch (link.action) {
       case 'create':
         console.log('Create case.')

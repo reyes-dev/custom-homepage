@@ -2,36 +2,30 @@ import React, { useState, useEffect } from "react";
 
 const NewWebLink = ({area_id, hidden}) => {
   const [name, setName] = useState("");
+  const [webUrl, setWebUrl] = useState(""); 
   const [displayForm, setDisplayForm] = useState(false);
-  const [webUrl, setWebUrl] = useState("");
-
+  /* Whenever hidden is toggled (edit mode), close up the new link form  */
   useEffect(() => {
     setDisplayForm(false);
   }, [hidden])
-
+  /* Reset the input fields to blank */
   const toggleNameUrl = () => {
     setName('');
     setWebUrl('');
   }
-
+  /* For condtionally rendering the new web link form  */
   const toggleDisplay = () => {
     if (displayForm) {
       return setDisplayForm(false);
     }
     setDisplayForm(true);
   }
-  /* In the stripHtmlEntities function, you replace the < and > characters with their escaped values. This way, you won’t store raw HTML in your database. */
-  const stripHtmlEntities = (str) => {
-    return String(str)
-      .replace(/\n/g, "<br> <br>")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-  };
 
   const onChange = (event, setFunction) => {
     setFunction(event.target.value);
   };
-
+  /* When the new web link form is submitted, this asynchronous function is called, 
+     POSTing the data to the create web link route in rails  */
   const onSubmit = async (event) => {
     event.preventDefault();
 

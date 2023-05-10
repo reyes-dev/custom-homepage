@@ -4,7 +4,7 @@ const DeleteWebLink = ({id, area_id, hidden}) => {
   const onClick = (event) => {
     event.preventDefault();
     const route = `/areas/${area_id}/web_links/${id}`;
-
+    /* Call to the rails web links delete route with fetch, passing in the selected link's ID */
     const token = document.querySelector('meta[name="csrf-token"]').content;
     fetch(route, {
       method: 'DELETE',

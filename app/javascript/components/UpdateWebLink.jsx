@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 
 const UpdateWebLink = ({ id, area_id, toggleDisplay, linkName, url, hidden }) => {
+  /* The displayed name of the link and the actual url to a web page  */
   const [name, setName] = useState(linkName);
   const [webUrl, setWebUrl] = useState(url);
   
   const onChange = (event, setFunction) => {
     setFunction(event.target.value);
   };
-
+  /* When the update link form is submitted, 
+    a PUT action is called with fetch to the web links update route in rails, 
+    updating the record with the new data */
   const onSubmit = (event) => {
     event.preventDefault();
     const route = `/areas/${area_id}/web_links/${id}`;
