@@ -4,7 +4,7 @@ import DeleteArea from "./DeleteArea";
 import WebLinks from './WebLinks'
 import NewWebLink from "./NewWebLink";
 
-const Area = ({ title, id, hidden }) => {
+const Area = ({ title, id, hidden, theme }) => {
   /* displayUpdate is simply the boolean which determines whether to conditionally render
   the UpdateArea component or render the title itself */
   const [displayUpdate, setDisplayUpdate] = useState(false);
@@ -21,12 +21,12 @@ const Area = ({ title, id, hidden }) => {
       <div className="flex gap-2 items-center">
       {displayUpdate ? <UpdateArea area_id={id} toggleDisplayUpdate={toggleDisplayUpdate} title={title} /> :
       <h2>
-        <button onClick={ toggleDisplayUpdate } className="text-area-title text-3xl">{title}</button>
+        <button onClick={ toggleDisplayUpdate } className={"text-3xl " + theme.area_title}>{title}</button>
       </h2>}
-      <DeleteArea area_id={id} hidden={hidden} />
+      <DeleteArea area_id={id} hidden={hidden} theme={theme} />
       </div>
-      <WebLinks area_id={id} hidden={hidden} />
-      <NewWebLink area_id={id} hidden={hidden} />
+      <WebLinks area_id={id} hidden={hidden} theme={theme} />
+      <NewWebLink area_id={id} hidden={hidden} theme={theme} />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewArea = ({hidden}) => {
+const NewArea = ({hidden, theme}) => {
   /* Name refers to the title of the new area */
   const [name, setName] = useState("");
   /* For conditionally rendering the form which creates a new area */
@@ -48,13 +48,13 @@ const NewArea = ({hidden}) => {
 
   return (
     <div className={hidden + ' flex gap-2 self-center'}>
-      <button onClick={ toggleDisplay }>[ + Area ]</button>
+      <button onClick={ toggleDisplay } className={theme.hover}>[ + Area ]</button>
       { displayForm ?
         ( 
         <div>
           <form onSubmit={onSubmit}>
             <input type='text' name='name' id='areaName' required onChange={(event) => onChange(event, setName)}></input>
-              <button type='submit'>{`[ => ]`}</button>
+              <button type='submit' className={theme.hover}>{`[ => ]`}</button>
           </form>
           </div>
         ) : null}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const NewWebLink = ({area_id, hidden}) => {
+const NewWebLink = ({area_id, hidden, theme}) => {
   const [name, setName] = useState("");
   const [webUrl, setWebUrl] = useState(""); 
   const [displayForm, setDisplayForm] = useState(false);
@@ -55,18 +55,18 @@ const NewWebLink = ({area_id, hidden}) => {
     }).catch((error) => { console.log(error.message); });
   };
 
-  return (
-    <div className={hidden}>
-      <button onClick={toggleDisplay}>[ + Link ]</button>
-      {displayForm ? (<form onSubmit={onSubmit}>
-          <label htmlFor="name">Name:</label>
-        <input type='text' name='name' id='webLinkName' required value={name} onChange={(event) => onChange(event, setName)}></input>
-          <label htmlFor="url">URL:</label>
-        <input type='text' name='web_url' id='web_url' required value={webUrl}  onChange={(event) => onChange(event, setWebUrl)}></input>
-        <button type='submit'>Add Link</button>
-        </form>) : null  }
-    </div>
-  )
+    return (
+        <div className={hidden}>
+        <button onClick={toggleDisplay} className={theme.hover}>[ + Link ]</button>
+        {displayForm ? (<form onSubmit={onSubmit}>
+            <label htmlFor="name">Name:</label>
+            <input type='text' name='name' id='webLinkName' required value={name} onChange={(event) => onChange(event, setName)}></input>
+            <label htmlFor="url">URL:</label>
+            <input type='text' name='web_url' id='web_url' required value={webUrl}  onChange={(event) => onChange(event, setWebUrl)}></input>
+            <button type='submit' className={'text-3xl  p-16' + theme.hover}>{`=>`}</button>
+            </form>) : null  }
+        </div>
+    )
 };
 
 export default NewWebLink;

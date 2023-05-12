@@ -1,6 +1,6 @@
 import React from "react";
 
-const DeleteArea = ({area_id, hidden}) => {  
+const DeleteArea = ({area_id, hidden, theme}) => {  
   const onClick = (event) => {
     event.preventDefault();
    /* Call to the rails area delete route with fetch, passing in the selected area's ID */
@@ -21,7 +21,7 @@ const DeleteArea = ({area_id, hidden}) => {
 
   return (
     <div className={hidden}>
-      <button onClick={onClick}>( - )</button>
+      <button onClick={onClick} className={theme.hover}>( - )</button>
     </div>
   )
 }

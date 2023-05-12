@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WebLink from "./WebLink";
 /* Component that handles rendering all the web links of a given area */
-const WebLinks = ({ area_id, hidden }) => {
+const WebLinks = ({ area_id, hidden, theme }) => {
   const [webLinks, setWebLinks] = useState([]);
   const [guid, setGuid] = useState('');
   const [ws, setWs] = useState('');
@@ -63,7 +63,7 @@ const WebLinks = ({ area_id, hidden }) => {
   };
 
   const allWebLinks = webLinks.map((link, index) => {
-    return <WebLink link={link} key={index} area_id={area_id} hidden={hidden} />
+    return <WebLink link={link} key={index} area_id={area_id} hidden={hidden} theme={theme} />
   });
 
   return (
