@@ -1,9 +1,9 @@
 class AreasController < ApplicationController
     def index
-      @areas = Area.all
+      @areas = Area.paginate(params[:pageNum])
       render json: @areas
     end
-  
+
     def create
       area = Area.create!(area_params)
       if area

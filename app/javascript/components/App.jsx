@@ -6,8 +6,9 @@ import ThemePicker from "./ThemePicker";
 const ws = new WebSocket('ws://localhost:3000/cable');
 
 function App() {
+    const [pageNum, setPageNum] = useState(0);
     /* Toggle CSS themes using Tailwind */
-    const themesArray = [{bg: ' bg-plain ', txt_clr: ' text-plainish ', hover: ' hover:text-boringhover ', box_clr: ' before:shadow-[inset_0_0_2000px_rgba(237,237,233,.5)] ', title_clr: ' text-boringtitle ', area_title: ' text-plain_area_title ', blur: ' before:blur-xl ' }, { bg: ' bg-angel-devil ', txt_clr: ' text-angel ', hover: ' hover:text-angelhover ', box_clr: ' before:shadow-[inset_0_0_2000px_rgba(103,0,6,.5)] ', title_clr: ' text-angeltitle ', area_title: ' text-angel_area_title ', blur: ' before:blur-none ' }];
+    const themesArray = [{ bg: ' bg-plain ', txt_clr: ' text-plainish ', hover: ' hover:text-boringhover ', box_clr: ' before:shadow-[inset_0_0_2000px_rgba(237,237,233,.5)] ', title_clr: ' text-boringtitle ', area_title: ' text-plain_area_title ', blur: ' before:blur-xl ' }, { bg: ' bg-angel-devil ', txt_clr: ' text-angel ', hover: ' hover:text-angelhover ', box_clr: ' before:shadow-[inset_0_0_2000px_rgba(103,0,6,.5)] ', title_clr: ' text-angeltitle ', area_title: ' text-angel_area_title ', blur: ' before:blur-none ' }];
     const [theme, setTheme] = useState(themesArray[0]);
     /* All existing areas, parts of the page that hold links, will be stored in the areas state array */
     const [areas, setAreas] = useState([]);
@@ -78,7 +79,7 @@ function App() {
     }, []);
     /* /areas is the rails route to GET created area records */
     const fetchAreas = async () => {
-        const response = await fetch('/areas');
+        const response = await fetch(`/areas/?pageNum=${pageNum}`);
         const data = await response.json();
         setAreas(data);
     };

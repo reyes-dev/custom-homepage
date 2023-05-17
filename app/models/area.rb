@@ -3,6 +3,7 @@ class Area < ApplicationRecord
   after_create_commit { broadcast_create_area }
   after_update_commit { broadcast_update_area }
   after_destroy_commit { broadcast_destroy_area }
+  scope :paginate, ->(pageNum) { offset((pageNum.to_s + 0.to_s).to_i).limit(10) }
 
   private
   def broadcast_create_area
