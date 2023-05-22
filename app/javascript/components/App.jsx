@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import NewArea from "./NewArea";
 import Area from "./Area";
 import ThemePicker from "./ThemePicker";
+import Pagination from "./Pagination";
 
 const ws = new WebSocket('ws://localhost:3000/cable');
 
 function App() {
     const [pageNum, setPageNum] = useState(0);
+    const [pageTotal, setPageTotal] = useState(0);
     /* Toggle CSS themes using Tailwind */
     const themesArray = [{ bg: ' bg-plain ', txt_clr: ' text-plainish ', hover: ' hover:text-boringhover ', box_clr: ' before:shadow-[inset_0_0_2000px_rgba(237,237,233,.5)] ', title_clr: ' text-boringtitle ', area_title: ' text-plain_area_title ', blur: ' before:blur-xl ' }, { bg: ' bg-angel-devil ', txt_clr: ' text-angel ', hover: ' hover:text-angelhover ', box_clr: ' before:shadow-[inset_0_0_2000px_rgba(103,0,6,.5)] ', title_clr: ' text-angeltitle ', area_title: ' text-angel_area_title ', blur: ' before:blur-none ' }];
     const [theme, setTheme] = useState(themesArray[0]);
@@ -18,6 +20,16 @@ function App() {
     const [hidden, setHidden] = useState('hidden');
     const selectTheme = (choice) => {
         setTheme(themesArray[choice])
+    }
+    /* Increment the pageNum, passed to Pagination component  */
+    const decrementPage = () => {
+       if(pageNum - 1 >= 0){
+            setPageNum(pageNum - 1);
+        }
+    }
+    /* Increment the pageNum, passed to Pagination component  */
+    const incrementPage = () => { 
+        setPageNum(pageNum + 1);
     }
     /* Toggle between empty string and 'hidden' string for use in CSS className attribute  */
     const toggleHidden = () => {
@@ -73,10 +85,14 @@ function App() {
         }
     };
 
-    /* Fetch all the areas currently in the database */
+    /* Fetch initial page of areas */
     useEffect(() => {
         fetchAreas();
     }, []);
+    /* Fetch current page of areas */
+    useEffect(() => {
+        fetchAreas();
+    }, [pageNum]);
     /* /areas is the rails route to GET created area records */
     const fetchAreas = async () => {
         const response = await fetch(`/areas/?pageNum=${pageNum}`);
@@ -84,8 +100,8 @@ function App() {
         setAreas(data);
     };
 
-    const allAreas = areas.map((area, index) => {
-        return <Area title={area.name} id={area.id} hidden={hidden} key={index} theme={theme} />
+    const allAreas = areas.map((area) => {
+        return <Area title={area.name} id={area.id} hidden={hidden} key={area.id} theme={theme} pageNum={pageNum} />
     });
 
     return (
@@ -101,6 +117,8 @@ function App() {
                 <div className="flex flex-wrap justify-start items-start">
                     {allAreas}
                 </div>
+               
+                 <Pagination incrementPage={incrementPage} decrementPage={decrementPage} theme={theme} />
             </div>
         </div>
     );

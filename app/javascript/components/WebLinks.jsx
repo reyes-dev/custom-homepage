@@ -9,7 +9,7 @@ const WebLinks = ({ area_id, hidden, theme }) => {
   useEffect(() => { setWs(new WebSocket('ws://localhost:3000/cable')); }, [])
   /* Fetch all the links currently in the database */
   useEffect(() => {
-    fetchLinks();
+      fetchLinks();
   }, []);
   /* Grabs links from Rails route for web links and filters them appropriate to the area they belong to */
   const fetchLinks = async () => {
@@ -62,8 +62,8 @@ const WebLinks = ({ area_id, hidden, theme }) => {
     }
   };
 
-  const allWebLinks = webLinks.map((link, index) => {
-    return <WebLink link={link} key={index} area_id={area_id} hidden={hidden} theme={theme} />
+  const allWebLinks = webLinks.map((link) => {
+    return <WebLink link={link} key={link.id} area_id={area_id} hidden={hidden} theme={theme} />
   });
 
   return (
